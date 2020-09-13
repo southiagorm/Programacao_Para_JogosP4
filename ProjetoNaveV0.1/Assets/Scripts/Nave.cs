@@ -1,46 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Nave : MonoBehaviour
 {
-    public float speed = 0.01f;
+    public float speed = 300;
     private float _h, _v;
-    
+
+    public GameObject prefabBala;
+
+    private Rigidbody2D _rb2dBody;
+
     void Start()
     {
-        
+        _rb2dBody = GetComponent<Rigidbody2D>();
     }
 
     
     void Update()
     {
-        //transform.Translate(0,0.01f,0);
-        //transform.Rotate(0, 0, 1);
-
-        /*if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-        {
-            transform.Translate(0,speed,0);
-        }
-
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.Translate(0,-speed,0);
-        }
-
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.Translate(speed, 0, 0);
-        }
-
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.Translate(-speed, 0, 0);
-        }*/
-
         _h = Input.GetAxisRaw("Horizontal");
         _v = Input.GetAxisRaw("Vertical");
 
-        transform.Translate(_h*speed,_v*speed, 0);
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(prefabBala, transform.position + new Vector3(0,1,0), transform.rotation);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        _rb2dBody.velocity = new Vector2(_h * speed * Time.deltaTime, _v * speed * Time.deltaTime);
     }
 }
