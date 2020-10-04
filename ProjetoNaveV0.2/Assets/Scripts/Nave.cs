@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Nave : MonoBehaviour
 {
-    public float speed = 300;
+    public float speed;
     private float _h, _v;
 
     public GameObject prefabBala;
@@ -100,11 +100,23 @@ public class Nave : MonoBehaviour
         StartCoroutine(CoroutineTrippleShoot());
     }
 
+    public void ActiveVelocity()
+    {
+        StartCoroutine(CoroutineVelocity());
+    }
+
 
     IEnumerator CoroutineTrippleShoot()
     {
         canTripleShoot = true;
         yield return new WaitForSeconds(5);
         canTripleShoot = false;
+    }
+
+    IEnumerator CoroutineVelocity()
+    {
+        speed = 15;
+        yield return new WaitForSeconds(5);
+        speed = 8;
     }
 }

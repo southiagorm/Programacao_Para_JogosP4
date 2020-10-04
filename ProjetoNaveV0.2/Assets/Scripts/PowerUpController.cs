@@ -35,6 +35,9 @@ public class PowerUpController : MonoBehaviour
                 case PowerUp.POWER:
                     other.gameObject.GetComponent<Nave>().ActiveTripleShoot();
                     break;
+                case PowerUp.VELOCITY:
+                    other.gameObject.GetComponent<Nave>().ActiveVelocity();
+                    break;
             }
         }
     }

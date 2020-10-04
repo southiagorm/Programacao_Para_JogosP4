@@ -44,7 +44,6 @@ public class Laser : MonoBehaviour
         print("enter trigger");
         if(other.CompareTag("Enemy"))
         {
-            Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
     }

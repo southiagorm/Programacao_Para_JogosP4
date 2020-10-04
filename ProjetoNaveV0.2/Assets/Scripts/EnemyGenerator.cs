@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyGenerator : MonoBehaviour
 {
-    public GameObject prefabInimigo;
+    public GameObject[] prefabInimigo;
 
     void Start()
     {
-        InvokeRepeating("GerarInimigo", 1, 2);    
+        InvokeRepeating("GerarInimigo", 1, 1.2f);    
     }
 
     public void GerarInimigo()
@@ -17,6 +17,18 @@ public class EnemyGenerator : MonoBehaviour
 
         Vector3 position = new Vector3(posX, transform.position.y,0);
 
-        Instantiate(prefabInimigo, position, Quaternion.identity);
+        Instantiate(GerarPrefabInimigo(), position, Quaternion.identity);
+    }
+
+    public GameObject GerarPrefabInimigo()
+    {
+        int valor = Random.Range(0, 101);
+        if(valor >= 60)
+        {
+            return prefabInimigo[0];
+        }else
+        {
+            return prefabInimigo[1];
+        }
     }
 }

@@ -8,6 +8,9 @@ public class EnemyBlack : MonoBehaviour
     public Vector2 direction;
 
     private Rigidbody2D _rb2dBody;
+
+    [SerializeField]
+    private GameObject prefabExplosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,5 +34,14 @@ public class EnemyBlack : MonoBehaviour
     void OnBecameInvisible()
     {
         Destroy(this.gameObject);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Laser"))
+        {
+            Destroy(this.gameObject);
+            Instantiate(prefabExplosion, transform.position, Quaternion.identity);
+        }
     }
 }
